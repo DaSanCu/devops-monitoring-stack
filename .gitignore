@@ -1,0 +1,4 @@
+# Docker volumes / Persistent data
+grafana/data/
+prometheus/data/
+loki/data/

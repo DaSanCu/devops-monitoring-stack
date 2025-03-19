@@ -8,6 +8,7 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/data:/prometheus
     networks:
       - monitoring
 
@@ -16,6 +17,8 @@ services:
     container_name: grafana
     ports:
       - "3000:3000"
+    volumes:
+      - ./grafana/data:/var/lib/grafana
     networks:
       - monitoring
 
@@ -24,6 +27,28 @@ services:
     container_name: node-exporter
     ports:
       - "9100:9100"
+    networks:
+      - monitoring
+
+  loki:
+    image: grafana/loki:2.8.2
+    container_name: loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/config.yaml:/etc/loki/config.yaml
+      - ./loki/data:/tmp/loki
+    command: -config.file=/etc/loki/config.yaml
+    networks:
+      - monitoring
+
+  promtail:
+    image: grafana/promtail:2.8.2
+    container_name: promtail
+    volumes:
+      - ./promtail/config.yaml:/etc/promtail/config.yaml
+      - /var/log:/var/log:ro
+    command: -config.file=/etc/promtail/config.yaml
     networks:
       - monitoring
 
