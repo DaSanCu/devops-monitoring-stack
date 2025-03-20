@@ -1,0 +1,27 @@
+name: CI/CD Deployment
+
+on:
+  push:
+    branches:
+      - main  # Passe das an deinen Branch an, falls du anders arbeitest
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Connect via SSH and Deploy
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: david
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd /home/david/projects/devops-monitoring-stack
+          git pull origin main
+          docker compose down
+          docker compose up -d --build
