@@ -1,0 +1,11 @@
+groups:
+- name: example-rules
+  rules:
+  - alert: HighCPUUsage
+    expr: 100 - (avg by (instance)(irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 20
+    for: 10s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Hohe CPU Last auf {{ $labels.instance }}"
+      description: "CPU-Auslastung liegt über 80% (aktuell: {{ $value }}%)"

@@ -1,0 +1,19 @@
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'devops.dfb@gmail.com'
+  smtp_auth_username: 'devops.dfb@gmail.com'
+  smtp_auth_password: 'yrsq gwfw rged wnmt'
+
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 1h
+  receiver: 'mail-alert'
+
+receivers:
+  - name: 'mail-alert'
+    email_configs:
+      - to: 'david.sanchezcuriel88@gmail.com'
+        send_resolved: true
+
