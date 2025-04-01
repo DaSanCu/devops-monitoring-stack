@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   prometheus:
@@ -19,7 +19,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./grafana/data:/var/lib/grafana
+      - ../grafana/data:/var/lib/grafana
     networks:
       - monitoring
     environment:
