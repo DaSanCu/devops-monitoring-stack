@@ -1,0 +1,19 @@
+---
+- name: Setup Docker Monitoring Stack
+  hosts: docker-monitoring
+  become: true
+
+  roles:
+    - docker
+
+  tasks:
+    - name: Clone Monitoring-Repo
+      git:
+        repo: https://github.com/DaSanCu/devops-monitoring-stack.git
+        dest: /opt/devops-monitoring
+        version: main
+
+    - name: Start Docker Compose Stack
+      command: docker-compose up -d
+      args:
+        chdir: /opt/devops-monitoring/docker-compose

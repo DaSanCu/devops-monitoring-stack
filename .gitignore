@@ -2,3 +2,11 @@
 grafana/data/
 prometheus/data/
 loki/data/
+# Lokale Grafana-Daten
+docker-compose/grafana-data/
+
+# Prometheus persistente Daten
+docker-compose/prometheus/data/
+
+# Loki persistente Daten
+docker-compose/loki/data/

@@ -1,0 +1,23 @@
+prometheus:
+  replicaCount: 1
+  image:
+    tag: latest
+  alertRules:
+    highCpuThreshold: 80
+
+grafana:
+  smtp:
+    enabled: true
+    host: smtp.gmail.com:587
+    user: devops.dfb@gmail.com
+    password: yrsq gwfw rged wnmt
+    fromAddress: devops.dfb@gmail.com
+    fromName: Grafana Alerts
+
+alertmanager:
+  emailReceiver: devops.dfb@gmail.com
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
